@@ -20,7 +20,18 @@ class Controller:
         self._view.update_page()
 
     def handle_cammino(self, e):
-        pass
+        localization = self._view.ddLocal.value
+
+        path = self._model.cerca_cammino(localization)
+        self._view.txt_result.controls.append(ft.Text(f"Il cammino più lungo dal nodo : {localization} è:"))
+
+        for n in path[0]:
+            self._view.txt_result.controls.append(ft.Text(f"{n}"))
+
+        self._view.txt_result.controls.append(ft.Text(f"con peso: {path[1]}"))
+        self._view.update_page()
+
+
 
     def start(self):
         self._model.creaGrafo()
